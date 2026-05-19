@@ -19,11 +19,11 @@ jobs:
         php: ['8.1', '8.2', '8.3']
 
     steps:
-      - name: Checkout Akaunting
+      - name: Checkout host application
         timeout-minutes: 1
         uses: actions/checkout@v4
         with:
-          repository: akaunting/akaunting
+          repository: ${{ github.repository_owner }}/akaunting
 
       - name: Checkout module to tmp path
         timeout-minutes: 1
@@ -56,11 +56,17 @@ jobs:
 
       - name: Download the extra modules
         timeout-minutes: 10
+        env:
+          MODULES_READ_TOKEN: ${{ secrets.MODULES_READ_TOKEN }}
         run: |
           for k in $(jq -r '."extra-modules" | keys | .[]' tmp-path-for-module/module.json); do
             modName=$(echo -n $k | sed -r 's/(^|-)([a-z])/\U\2/g')
             mkdir -p modules/$modName
-            git clone https://${{ secrets.AKAUNTING_OFFICIAL_TOKEN }}:x-oauth-basic@github.com/akaunting/module-${k}.git modules/$modName
+            if [ -n "$MODULES_READ_TOKEN" ]; then
+              git clone https://${MODULES_READ_TOKEN}:x-oauth-basic@github.com/${{ github.repository_owner }}/module-${k}.git modules/$modName
+            else
+              git clone https://github.com/${{ github.repository_owner }}/module-${k}.git modules/$modName
+            fi
           done
 
       - name: Remove the tmp folder

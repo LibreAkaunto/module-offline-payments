@@ -2,14 +2,13 @@
     "config": {
         "autoloader-suffix": "offlinePayments"
     },
-    "name": "akaunting/module-offline-payments",
-    "description": "Offline Payments app for Akaunting",
-    "homepage": "https://akaunting.com",
+    "name": "libreakaunto/module-offline-payments",
+    "description": "Offline Payments module",
+    "homepage": "https://github.com/LibreAkaunto/module-offline-payments",
     "keywords": [
         "laravel",
         "accounting",
         "invoice",
-        "akaunting",
         "offline-payments"
     ],
     "license": "GPL-3.0+",
