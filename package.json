@@ -16,6 +16,6 @@
         "laravel-mix": "^6.0.39",
         "resolve-url-loader": "^5.0.0"
     },
-    "author": "Akaunting Inc <info@akaunting.com>",
-    "description": "Free Accounting Software"
+    "author": "LibreAkaunto",
+    "description": "Offline Payments module"
 }
